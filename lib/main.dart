@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IFR Search Page',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'IFR Search Page'),
     );
   }
 }
@@ -29,11 +29,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        HomeTitle(),
-        RowCards(),
-        Paragraph(),
-      ]),
+      body: Column(
+        children: [
+          HomeTitle(),
+          RowCards(),
+          Paragraph(),
+        ],
+      ),
     );
   }
 }
