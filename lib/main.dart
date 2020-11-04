@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import './screens/Title.dart';
-import 'screens/Cards.dart';
-import 'screens/Paragraph.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,13 +26,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          HomeTitle(),
-          RowCards(),
-          Paragraph(),
-        ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: HomeScreen()       
       ),
     );
   }
