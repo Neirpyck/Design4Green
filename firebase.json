@@ -4,11 +4,11 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_module/**"
+      "**/node_modules/**"
     ],
     "rewrites": [
       {
-        "sources": "*",
+        "source": "**",
         "destination": "/index.html"
       }
     ]
