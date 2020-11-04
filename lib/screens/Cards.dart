@@ -19,6 +19,7 @@ class RowCards extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ResultCard extends StatelessWidget {
   int pop;
   int score;
