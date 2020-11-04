@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card.dart';
 
 class RowCards extends StatelessWidget {
   const RowCards({
@@ -39,11 +40,9 @@ class ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Recto(pop, score, collectivite),
-        Verso(accesNum, accesInfo, compAdmin, compNum),
-      ],
+    return FlipCard(
+      front: Recto(pop, score, collectivite),
+      back: Verso(accesNum, accesInfo, compAdmin, compNum),
     );
   }
 }
