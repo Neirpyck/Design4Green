@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import './screens/Title.dart';
 import 'screens/Cards.dart';
 import 'screens/Paragraph.dart';
+import 'package:algolia/algolia.dart';
 
-void main() {
+class Application {
+  static final Algolia algolia = Algolia.init(
+    applicationId: 'F4E5YFM8PV',
+    apiKey: 'f77475277758ad733f124b23fea7edcb',
+  );
+}
+
+void main() async {
+  Algolia algolia = Application.algolia;
   runApp(MyApp());
 }
 
