@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card.dart';
 
 class RowCards extends StatelessWidget {
   const RowCards({
@@ -10,26 +11,38 @@ class RowCards extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ResultCard(),
-        ResultCard(),
-        ResultCard(),
+        ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+        ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+        ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
       ],
     );
   }
 }
 
 class ResultCard extends StatelessWidget {
-  const ResultCard({
-    Key key,
-  }) : super(key: key);
+  int pop;
+  int score;
+  String collectivite;
+  int accesNum;
+  int accesInfo;
+  int compAdmin;
+  int compNum;
+
+  ResultCard(
+    this.pop,
+    this.score,
+    this.collectivite,
+    this.accesNum,
+    this.accesInfo,
+    this.compAdmin,
+    this.compNum,
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Recto(2000, 93, 'Seiches sur le Loir'),
-        Verso(97, 78, 96, 105),
-      ],
+    return FlipCard(
+      front: Recto(pop, score, collectivite),
+      back: Verso(accesNum, accesInfo, compAdmin, compNum),
     );
   }
 }
