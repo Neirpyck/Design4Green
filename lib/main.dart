@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import './screens/Title.dart';
+import 'screens/Cards.dart';
+import 'screens/Paragraph.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +28,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Column(children: [
+        HomeTitle(),
+        RowCards(),
+        Paragraph(),
+      ]),
+    );
   }
 }
