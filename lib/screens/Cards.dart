@@ -8,24 +8,27 @@ class RowCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width <= 900) {
+    if (MediaQuery.of(context).size.width <= 1300) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+          ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+          ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+          ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
         ],
       );
-    } else {}
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-        ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-        ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-      ],
-    );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+          ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+          ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+          ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
+        ],
+      );
+    }
   }
 }
 
