@@ -24,7 +24,12 @@ class ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Recto(2000, 93);
+    return Column(
+      children: [
+        Recto(2000, 93, 'Seiches sur le Loir'),
+        Verso(97, 78, 96, 105),
+      ],
+    );
   }
 }
 
@@ -32,30 +37,40 @@ class ResultCard extends StatelessWidget {
 class Recto extends StatelessWidget {
   int pop;
   int score;
+  String collectivite;
 
   Recto(
     this.pop,
     this.score,
+    this.collectivite,
   );
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text('Commune'),
-              Text('$pop'),
-            ],
-          ),
-          Row(
-            children: [
-              Text('Score'),
-              Text('$score'),
-            ],
-          )
-        ],
+      child: Container(
+        width: 300,
+        height: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(collectivite),
+                Text('Score'),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('$pop'),
+                Text('$score'),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -78,33 +93,33 @@ class Verso extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text('Accès Numérique'),
-              Text('$accesNum'),
-            ],
-          ),
-          Row(
-            children: [
-              Text('Accès Information'),
-              Text('$accesInfo'),
-            ],
-          ),
-          Row(
-            children: [
-              Text('Compétences administratives'),
-              Text('$compAdmin'),
-            ],
-          ),
-          Row(
-            children: [
-              Text('Compétences numériques'),
-              Text('$compNum'),
-            ],
-          ),
-        ],
+      child: Container(
+        width: 300,
+        height: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Accès Numérique'),
+                Text('Accès Information'),
+                Text('Compétences administratives'),
+                Text('Compétences numériques'),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('$accesInfo'),
+                Text('$accesNum'),
+                Text('$compAdmin'),
+                Text('$compNum'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
