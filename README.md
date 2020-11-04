@@ -4,10 +4,11 @@ project.
 
 Owner:
 1. Cyprien
+2. Matthieu
 
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
+TODO: Guide users through getting your code up and running on their own system. In this section yVous pouvez contacter Arou can talk about:
 1.	Installation process
 2.	Software dependencies
 3.	Latest releases
