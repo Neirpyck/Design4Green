@@ -1,18 +1,6 @@
 {
-  "hosting": {
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },
+  "public": "public",
+
   "headers": [
     {
       "source": "**/*.@(eot|otf|ttf|ttc|woff|css)",
