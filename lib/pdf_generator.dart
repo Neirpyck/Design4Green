@@ -20,6 +20,7 @@ class PdfGenerator extends StatelessWidget {
     final bytes = pdf.save();
     final blob = html.Blob([bytes], 'application/pdf');
 
+    // ignore: non_constant_identifier_names
     void Download_Pdf() {
       final url = html.Url.createObjectUrlFromBlob(blob);
       final anchor = html.document.createElement('a') as html.AnchorElement
@@ -32,6 +33,7 @@ class PdfGenerator extends StatelessWidget {
       html.Url.revokeObjectUrl(url);
     }
 
+    // ignore: non_constant_identifier_names
     void Display_Pdf() {
       final url = html.Url.createObjectUrlFromBlob(blob);
       html.window.open(url, "_blank");
