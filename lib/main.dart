@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
-import './screens/Title.dart';
-import 'screens/Cards.dart';
-import 'screens/Paragraph.dart';
-import 'package:algolia/algolia.dart';
+import 'screens/home_screen.dart';
 
-class Application {
-  static final Algolia algolia = Algolia.init(
-    applicationId: 'F4E5YFM8PV',
-    apiKey: 'f77475277758ad733f124b23fea7edcb',
-  );
-}
-
-void main() async {
-  Algolia algolia = Application.algolia;
+void main() {
   runApp(MyApp());
 }
 
@@ -37,13 +26,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          HomeTitle(),
-          RowCards(),
-          Paragraph(),
-        ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: HomeScreen()       
       ),
     );
   }
