@@ -27,6 +27,7 @@ dependencies:
   algolia:  ^0.1.6+1
   pdf: ^1.11.2
   universal_html: ^1.2.1
+  cloud_firestore: ^0.14.2
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,10 +1,22 @@
 import 'package:design4green/pdf_generator.dart';
 import 'package:design4green/screens/Cards.dart';
+import 'package:design4green/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/prefer_universal/indexed_db.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Map<String, dynamic> result;
+
   @override
   Widget build(BuildContext context) {
+    MyDatabase _database = MyDatabase();
+    bool asResult = false;
+
     return ListView(
       children: [
         Padding(
@@ -27,14 +39,25 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width > 900
-                        ? MediaQuery.of(context).size.width * 0.3
-                        : MediaQuery.of(context).size.width * 0.5,
+                      ? MediaQuery.of(context).size.width * 0.3
+                      : MediaQuery.of(context).size.width * 0.5,
                     child: TextField(
+                      onSubmitted: (value) async {
+                        Map<String, dynamic> hit = await _database.getData(value);
+                        setState(() {
+                          result = hit; 
+                          if(result != null){
+                            asResult = true;
+                          }
+                        });
+                      },
                       decoration: InputDecoration(
                         hintText: 'Code postal',
                         suffixIcon: IconButton(
                           icon: Icon(Icons.arrow_downward),
-                          onPressed: () {},
+                          onPressed: ()  {
+
+                          },
                         ),
                         border: OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
@@ -56,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              RowCards(),
+              RowCards(result: (asResult = true) ? result : null),
               Padding(
                 padding: EdgeInsets.only(top: 20.0),
                 child: PdfGenerator(),

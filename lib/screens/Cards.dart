@@ -1,46 +1,108 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 
-class RowCards extends StatelessWidget {
-  const RowCards({
-    Key key,
-  }) : super(key: key);
+class RowCards extends StatefulWidget {
+  final Map<String, dynamic> result;
+  
+  RowCards({
+    this.result
+  });
 
   @override
+  _RowCardsState createState() => _RowCardsState();
+}
+
+class _RowCardsState extends State<RowCards> {
+  @override
   Widget build(BuildContext context) {
+    print(widget.result);
+    print('aaaaaa');
+
     if (MediaQuery.of(context).size.width <= 1300) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
-        ],
-      );
+      if(widget.result == null) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+                ResultCard(null, null, '-', null, null, null, null),
+                ResultCard(null, null, '-', null, null, null, null),
+                ResultCard(null, null, '-', null, null, null, null),
+                ResultCard(null, null, '-', null, null, null, null),
+
+                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
+
+                // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
+          ],
+        );
+      } else {
+        return Container();
+      }
+     
     } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-          ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
-        ],
-      );
+      if(widget.result == null) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ResultCard(null, null, '-', null, null, null, null),
+            ResultCard(null, null, '-', null, null, null, null),
+            ResultCard(null, null, '-', null, null, null, null),
+            ResultCard(null, null, '-', null, null, null, null),
+
+                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
+
+                // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
+          ],
+        );
+      } else {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ResultCard(
+              widget.result['Population'],
+              widget.result['SCORE_GLOBAL'],
+              widget.result['Nom_Com'],
+              widget.result['ACCÈS_AUX_INTERFACES_NUMERIQUES'],
+              widget.result['ACCES_INFORMATION'],
+              widget.result['COMPETENCES_ADMINISTATIVES'],
+              widget.result['COMPÉTENCES_NUMÉRIQUES_SCOLAIRES']
+            ),
+            ResultCard(null, null, '-', null, null, null, null),
+            ResultCard(null, null, '-', null, null, null, null),
+            ResultCard(null, null, '-', null, null, null, null),
+          ],
+        );
+      }
+      // return Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //   children: [
+      //     ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+      //     ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+      //     ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+      //     ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
+      //   ],
+      // );
     }
   }
 }
 
 // ignore: must_be_immutable
 class ResultCard extends StatelessWidget {
-  int pop;
-  int score;
+  String pop;
+  String score;
   String collectivite;
-  int accesNum;
-  int accesInfo;
-  int compAdmin;
-  int compNum;
+  String accesNum;
+  String accesInfo;
+  String compAdmin;
+  String compNum;
 
   ResultCard(
     this.pop,
@@ -63,8 +125,8 @@ class ResultCard extends StatelessWidget {
 
 // ignore: must_be_immutable
 class Recto extends StatelessWidget {
-  int pop;
-  int score;
+  String pop;
+  String score;
   String collectivite;
 
   Recto(
@@ -109,10 +171,10 @@ class Recto extends StatelessWidget {
 
 // ignore: must_be_immutable
 class Verso extends StatelessWidget {
-  int accesNum;
-  int accesInfo;
-  int compAdmin;
-  int compNum;
+  String accesNum;
+  String accesInfo;
+  String compAdmin;
+  String compNum;
 
   Verso(
     this.accesNum,
