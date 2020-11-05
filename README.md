@@ -15,3 +15,13 @@ debian
 k67rd2sgBsD6	
 BTGF	
 15
+
+
+
+Les sources de ce challenge restent la propriété de l'équipe de développeurs:
+Equipe 15:
+-Cyprien BARBAULT
+-Romain GIROU
+-Matthieu PASQUIER
+-Xavier MOTHELAY
+
