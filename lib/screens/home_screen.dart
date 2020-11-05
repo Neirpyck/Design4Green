@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                   child: Text(
-                    'Trouvez l\'indice de fragilité de votre commune',
+                    'Trouvez l\'indice de fragilité numérique de votre commune',
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
                     textAlign: TextAlign.center,
                   ),
@@ -39,14 +39,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width > 900
-                      ? MediaQuery.of(context).size.width * 0.3
-                      : MediaQuery.of(context).size.width * 0.5,
+                        ? MediaQuery.of(context).size.width * 0.3
+                        : MediaQuery.of(context).size.width * 0.5,
                     child: TextField(
                       onSubmitted: (value) async {
-                        Map<String, dynamic> hit = await _database.getData(value);
+                        Map<String, dynamic> hit =
+                            await _database.getData(value);
                         setState(() {
-                          result = hit; 
-                          if(result != null){
+                          result = hit;
+                          if (result != null) {
                             asResult = true;
                           }
                         });
@@ -55,9 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         hintText: 'Code postal',
                         suffixIcon: IconButton(
                           icon: Icon(Icons.arrow_downward),
-                          onPressed: ()  {
-
-                          },
+                          onPressed: () {},
                         ),
                         border: OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
