@@ -22,8 +22,8 @@ class _RowCardsState extends State<RowCards> {
 
   showingCards(Map<String, dynamic> data) {
     cardCommune =  ResultCard(data["pop"], data["score_glob"], data["nom_iris"], data["acces_num"], data["acces_info"], data["compt_admin"], data["compt_num_sco"]);
-    cardDept = ResultCard(null, null, '-', null, null, null, null);
-    cardRegion = ResultCard(null, null, '-', null, null, null, null);
+    cardDept = ResultCard("", data["score_glob_dept"], data["nom_dept"], data["score_num_dept"], data["acces_info_dep"], data["compt_admin_dep"], data["compt_num_sco_dep"]);
+    cardRegion = ResultCard("", data["score_glob_reg"], data["nom_region"], data["acces_num_reg"], data["acces_info_reg"], data["compt_admin_reg"], data["compt_num_sco_reg"]);
     return true;
   }
 

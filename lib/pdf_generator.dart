@@ -31,15 +31,15 @@ class PdfGenerator extends StatelessWidget {
               ]),
               pw.Row(children: [
                 pw.Text("Code Postal: "),
-                pw.Text("Variable CP"),
+                pw.Text(result['code_postal']),
               ]),
               pw.Row(children: [
                 pw.Text("Département: "),
-                pw.Text("Variable dep"),
+                pw.Text(result['dept']),
               ]),
               pw.Row(children: [
                 pw.Text("Région: "),
-                pw.Text("${result["class_score_glob_region"]}\n"),
+                pw.Text(result['nom_region']),
               ]),
               pw.Header(
                 level: 0,
@@ -73,23 +73,23 @@ class PdfGenerator extends StatelessWidget {
               ),
               pw.Row(children: [
                 pw.Text("Accès Numérique: "),
-                pw.Text("Variable num"),
+                pw.Text(result["score_num_dept"]),
               ]),
               pw.Row(children: [
                 pw.Text("Accès Information: "),
-                pw.Text("Variable info"),
+                pw.Text(result["acces_info_dep"]),
               ]),
               pw.Row(children: [
                 pw.Text("Compétence administratives: "),
-                pw.Text("Variable admin"),
+                pw.Text(result["compt_admin_dep"]),
               ]),
               pw.Row(children: [
                 pw.Text("Compétences numériques: "),
-                pw.Text("Variable num"),
+                pw.Text(result["compt_num_sco_dep"]),
               ]),
               pw.Row(children: [
                 pw.Text("Score Global: "),
-                pw.Text("Variable glob\n"),
+                pw.Text(result["score_glob_dept"]),
               ]),
               pw.Header(
                 level: 0,
@@ -98,23 +98,23 @@ class PdfGenerator extends StatelessWidget {
               ),
               pw.Row(children: [
                 pw.Text("Accès Numérique: "),
-                pw.Text("Variable num"),
+                pw.Text(result["acces_num_reg"]),
               ]),
               pw.Row(children: [
                 pw.Text("Accès Information: "),
-                pw.Text("Variable info"),
+                pw.Text(result["acces_info_reg"]),
               ]),
               pw.Row(children: [
                 pw.Text("Compétence administratives: "),
-                pw.Text("Variable admin"),
+                pw.Text(result["compt_admin_reg"]),
               ]),
               pw.Row(children: [
                 pw.Text("Compétences numériques: "),
-                pw.Text("Variable num"),
+                pw.Text(result["compt_num_sco_reg"]),
               ]),
               pw.Row(children: [
                 pw.Text("Score Global: "),
-                pw.Text("Variable glob\n"),
+                pw.Text(result["score_glob_reg"]),
               ]),
             ],
           );
