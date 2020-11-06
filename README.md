@@ -1,6 +1,6 @@
 # Presentation of the project:
 The goal of this project is to display information about the Digital Fragility Territory Index on the most eco-friendly website. 
-Site accessible at: http://vps-5532de70.vps.ovh.net:81/
+Site accessible at: http://vps-5532de70.vps.ovh.net/
 You can acces sonar-scanner at: http://vps-5532de70.vps.ovh.net:9000/
 
 
