@@ -213,27 +213,30 @@ class PdfGenerator extends StatelessWidget {
       html.Url.revokeObjectUrl(url);
     }
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        //bouton afficher pdf dans le navigateur web
-        RaisedButton(
-          child: Text('Open'),
-          onPressed: () {
-            Display_Pdf();
-          },
-        ),
-        Container(
-          width: 10,
-        ),
-        //bouton télécharger
-        RaisedButton(
-          child: Text('Download'),
-          onPressed: () {
-            Download_Pdf();
-          },
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(top: 15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          //bouton afficher pdf dans le navigateur web
+          RaisedButton(
+            child: Text('Open pdf'),
+            onPressed: () {
+              Display_Pdf();
+            },
+          ),
+          Container(
+            width: 10,
+          ),
+          //bouton télécharger
+          RaisedButton(
+            child: Text('Download pdf'),
+            onPressed: () {
+              Download_Pdf();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

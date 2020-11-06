@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Map<String, dynamic>> result;
   bool asResult = false;
+  bool displayMentionLegal = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 RowCards(result: (asResult = true) ? result : null)
               :
                 Container(),
-              // Padding(
-              //   padding: EdgeInsets.only(top: 20.0),
-              //   child: 
-              //     (asResult == true) ?
-              //       PdfGenerator(result: (asResult = true) ? result : null)
-              //     :
-              //       Container(),
-              // ),
               Container(
                 padding: EdgeInsets.only(top: 30.0),
                 width: MediaQuery.of(context).size.width < 900
@@ -105,6 +98,48 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 50),
+              FlatButton(
+                padding: EdgeInsets.all(20.0),
+                onPressed: () {
+                  setState(() {
+                    displayMentionLegal = !displayMentionLegal;
+                  });
+                },
+                shape: RoundedRectangleBorder(side: BorderSide(
+                  color: Colors.grey,
+                  width: 1,
+                  style: BorderStyle.solid
+                ),
+                borderRadius: BorderRadius.circular(20)),
+                child: Text('Mentions légales')
+              ),
+              displayMentionLegal == true ?
+                Padding(
+                  padding: EdgeInsets.all(30.0),
+                  child: Text(
+                    "Edition du site :\n"
+                    "Ce site à été conçu et édité par l’équipe n°15 du Design4Green du 04/11/2020.\n\n"
+                    "Propriété intellectuelle :\n"
+                    "L’ensemble du site relève de la législation française et internationale sur le droit d’auteur et la propriété intellectuelle. "
+                    "Tous les droits de reproductions sont réservés, y compris les représentations photographiques. La reproduction, adaptation et/ou"
+                    "traduction de tout ou partie de ce site sur un support quel qu’il soit, est formellement interdite sauf autorisation expresse de l’équipe d’édition.\n\n"
+                    "Modification du site :\n"
+                    "l’équipe se réserve le droit de modifier ou de corriger le contenu de ce site et de ces mentions légales à tout moment et ceci sans préavis.\n\n"
+                    "Hébergeur :\n"
+                    "Le site https://design4green-47860.web.app/#/ est hébergé par la société Google.\n\n"
+                    "Sources :\n"
+                    "Toutes les données relatives aux « indices de fragilité numérique » proviennent des données disponibles librement sur le site https://indice.institutnr.org/. "
+                    "De plus les logos et imageries utilisés et leur propriété intellectuelle reviennent à leurs auteurs et propriétaires respectifs, sauf explicitement cité autrement.\n\n"
+                    "Utilisation de Donnée :\n"
+                    "Le site n’a pas vocation à collecter ou traiter des données de quelque manière que ce soit et décline toute responsabilité en cas de collecte, utilisation, ou partage, "
+                    "illicite ou non de données personnelles provenant d’un ou plusieurs utilisateurs du site.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.w200),
+                  ),
+                )
+              :
+                Container()
             ],
           ),
         ),
