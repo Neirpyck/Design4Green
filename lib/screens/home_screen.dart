@@ -10,12 +10,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Map<String, dynamic> result;
+  List<Map<String, dynamic>> result;
+  bool asResult = false;
 
   @override
   Widget build(BuildContext context) {
-    MyDatabase _database = MyDatabase();
-    bool asResult = false;
 
     return ListView(
       children: [
@@ -28,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                   child: Text(
-                    'Trouvez l\'indice de fragilité numérique de votre commune',
+                    'Trouvez l\'indice de fragilité de votre commune',
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
                     textAlign: TextAlign.center,
                   ),
@@ -39,24 +38,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width > 900
-                        ? MediaQuery.of(context).size.width * 0.3
-                        : MediaQuery.of(context).size.width * 0.5,
+                      ? MediaQuery.of(context).size.width * 0.3
+                      : MediaQuery.of(context).size.width * 0.5,
                     child: TextField(
                       onSubmitted: (value) async {
-                        Map<String, dynamic> hit =
-                            await _database.getData(value);
-                        setState(() {
-                          result = hit;
-                          if (result != null) {
-                            asResult = true;
+                        List<Map<String, dynamic>> hit = await getData(value);
+                        result = hit; 
+                          if(hit != null){
+                            setState(() {
+                              asResult = true;
+                            });
                           }
-                        });
                       },
                       decoration: InputDecoration(
                         hintText: 'Code postal',
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.arrow_downward),
-                          onPressed: () {},
+                          icon: Icon(Icons.search),
+                          onPressed: ()  {
+
+                          },
                         ),
                         border: OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
@@ -66,23 +66,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width > 900 ? 50 : 10),
-                  FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Colors.grey)),
-                    height: 60,
-                    onPressed: () {},
-                    child: Icon(Icons.search),
-                  ),
                 ],
               ),
-              RowCards(result: (asResult = true) ? result : null),
-              Padding(
-                padding: EdgeInsets.only(top: 20.0),
-                child: PdfGenerator(),
-              ),
+              (asResult == true) ? 
+                RowCards(result: (asResult = true) ? result : null)
+              :
+                Container(),
+              // Padding(
+              //   padding: EdgeInsets.only(top: 20.0),
+              //   child: 
+              //     (asResult == true) ?
+              //       PdfGenerator(result: (asResult = true) ? result : null)
+              //     :
+              //       Container(),
+              // ),
               Container(
                 padding: EdgeInsets.only(top: 30.0),
                 width: MediaQuery.of(context).size.width < 900

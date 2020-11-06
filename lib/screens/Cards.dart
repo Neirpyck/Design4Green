@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 
+import '../pdf_generator.dart';
+
 class RowCards extends StatefulWidget {
-  final Map<String, dynamic> result;
+  final List<Map<String, dynamic>> result;
   
   RowCards({
     this.result
@@ -13,73 +15,143 @@ class RowCards extends StatefulWidget {
 }
 
 class _RowCardsState extends State<RowCards> {
+  bool showCards = false;
+  Widget myCards;
+  Map<String, dynamic> selectedData = {};
+
+  showingCards(Map<String, dynamic> data) {
+    myCards = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ResultCard(data["pop"], data["score_glob"], data["nom_iris"], data["acces_num"], data["acces_info"], data["compt_admin"], data["compt_num_sco"]),
+        ResultCard(null, null, '-', null, null, null, null),
+        ResultCard(null, null, '-', null, null, null, null),
+      ],
+    );
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(widget.result);
-    print('aaaaaa');
-
-    if (MediaQuery.of(context).size.width <= 1300) {
-      if(widget.result == null) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-                ResultCard(null, null, '-', null, null, null, null),
-                ResultCard(null, null, '-', null, null, null, null),
-                ResultCard(null, null, '-', null, null, null, null),
-                ResultCard(null, null, '-', null, null, null, null),
-
-                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
-
-                // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
-          ],
+      if (MediaQuery.of(context).size.width <= 1300) {
+      if(widget.result != null) {
+        return Container(
+          height: 300,
+          width: 300,
+          child: ListView.builder(
+            itemCount: widget.result.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: widget.result[index]['nom_iris'],
+              );
+            },
+          ),
         );
+        // return Column(
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   children: [
+        //         ResultCard(null, null, '-', null, null, null, null),
+        //         ResultCard(null, null, '-', null, null, null, null),
+        //         ResultCard(null, null, '-', null, null, null, null),
+        //         ResultCard(null, null, '-', null, null, null, null),
+
+        //         // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+        //         // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+        //         // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
+
+        //         // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+        //         // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+        //         // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+        //         // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
+        //   ],
+        // );
       } else {
         return Container();
       }
      
     } else {
-      if(widget.result == null) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ResultCard(null, null, '-', null, null, null, null),
-            ResultCard(null, null, '-', null, null, null, null),
-            ResultCard(null, null, '-', null, null, null, null),
-            ResultCard(null, null, '-', null, null, null, null),
+      if(widget.result != null) {
+         return Column(
+           children: [
+             Container(
+               height: 300,
+               width: MediaQuery.of(context).size.width > 900
+                  ? MediaQuery.of(context).size.width * 0.3
+                  : MediaQuery.of(context).size.width * 0.5,
+               child: ListView.builder(
+                itemCount: widget.result.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: () {
+                        setState(() {
+                          showingCards(widget.result[index]);
+                          selectedData = widget.result[index];
+                          showCards = true;
+                        });
+                        print(widget.result[index]);
+                      },
+                      title: Text(widget.result[index]['nom_iris']),
+                    ),
+                  );
+                },
+              ),
+             ),
+            (showCards == true) ?
+              myCards
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     ResultCard(null, null, '-', null, null, null, null),
+              //     ResultCard(null, null, '-', null, null, null, null),
+              //     ResultCard(null, null, '-', null, null, null, null),
+              //   ],
+              // )
+            :
+              Container(),
+            (showCards == true) ?
+              PdfGenerator(result: selectedData)
+            :
+              Container(),
+           ],
+         );
+        // return Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // children: [
+          //   ResultCard(null, null, '-', null, null, null, null),
+          //   ResultCard(null, null, '-', null, null, null, null),
+          //   ResultCard(null, null, '-', null, null, null, null),
+          //   ResultCard(null, null, '-', null, null, null, null),
 
-                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
+          //       // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+          //       // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+          //       // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
 
-                // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-                // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
-          ],
-        );
+          //       // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
+          //       // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
+          //       // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
+          //       // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
+          // ],
+        // );
       } else {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ResultCard(
-              widget.result['Population'],
-              widget.result['SCORE_GLOBAL'],
-              widget.result['Nom_Com'],
-              widget.result['ACCÈS_AUX_INTERFACES_NUMERIQUES'],
-              widget.result['ACCES_INFORMATION'],
-              widget.result['COMPETENCES_ADMINISTATIVES'],
-              widget.result['COMPÉTENCES_NUMÉRIQUES_SCOLAIRES']
-            ),
-            ResultCard(null, null, '-', null, null, null, null),
-            ResultCard(null, null, '-', null, null, null, null),
-            ResultCard(null, null, '-', null, null, null, null),
-          ],
-        );
+        // return Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   children: [
+        //     ResultCard(
+        //       widget.result['pop'],
+        //       widget.result['score_glob'],
+        //       widget.result['nom_com'],
+        //       widget.result['acces_num'],
+        //       widget.result['acces_info'],
+        //       widget.result['compt_admin'],
+        //       widget.result['compt_num_sco']
+        //     ),
+        //     ResultCard(null, null, '-', null, null, null, null),
+        //     ResultCard(null, null, '-', null, null, null, null),
+        //     ResultCard(null, null, '-', null, null, null, null),
+        //   ],
+        // );
+        return Container();
       }
       // return Row(
       //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

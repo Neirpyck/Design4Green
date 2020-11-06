@@ -4,6 +4,12 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:universal_html/html.dart' as html;
 
 class PdfGenerator extends StatelessWidget {
+  final Map<String, dynamic> result;
+  
+  PdfGenerator({
+    this.result
+  });
+
   @override
   Widget build(BuildContext context) {
     final pdf = pw.Document();
@@ -21,7 +27,7 @@ class PdfGenerator extends StatelessWidget {
                       style: pw.TextStyle(fontSize: 14))),
               pw.Row(children: [
                 pw.Text("Nom de la commune: "),
-                pw.Text("Variable nom"),
+                pw.Text(result['nom_iris']),
               ]),
               pw.Row(children: [
                 pw.Text("Code Postal: "),
@@ -33,7 +39,7 @@ class PdfGenerator extends StatelessWidget {
               ]),
               pw.Row(children: [
                 pw.Text("Région: "),
-                pw.Text("Variable reg" + "\n"),
+                pw.Text("${result["class_score_glob_region"]}\n"),
               ]),
               pw.Header(
                 level: 0,
@@ -42,23 +48,23 @@ class PdfGenerator extends StatelessWidget {
               ),
               pw.Row(children: [
                 pw.Text("Accès Numérique: "),
-                pw.Text("Variable num" + " %"),
+                pw.Text(result['acces_num']),
               ]),
               pw.Row(children: [
                 pw.Text("Accès Information: "),
-                pw.Text("Variable info" + " %"),
+                pw.Text(result['acces_info']),
               ]),
               pw.Row(children: [
                 pw.Text("Compétence administratives: "),
-                pw.Text("Variable admin" + " %"),
+                pw.Text(result['compt_admin']),
               ]),
               pw.Row(children: [
                 pw.Text("Compétences numériques: "),
-                pw.Text("Variable num" + " %"),
+                pw.Text(result['compt_num_sco']),
               ]),
               pw.Row(children: [
                 pw.Text("Score Global: "),
-                pw.Text("Variable glob" + " % \n"),
+                pw.Text(result['score_glob']),
               ]),
               pw.Header(
                 level: 0,
