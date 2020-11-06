@@ -21,7 +21,7 @@ class _RowCardsState extends State<RowCards> {
   Map<String, dynamic> selectedData = {};
 
   showingCards(Map<String, dynamic> data) {
-    cardCommune =  ResultCard(data["pop"], data["score_glob"], data["nom_iris"], data["acces_num"], data["acces_info"], data["compt_admin"], data["compt_num_sco"]);
+    cardCommune =  ResultCard(data["pop"] + " hab", data["score_glob"], data["nom_iris"], data["acces_num"], data["acces_info"], data["compt_admin"], data["compt_num_sco"]);
     cardDept = ResultCard("", data["score_glob_dept"], data["nom_dept"], data["score_num_dept"], data["acces_info_dep"], data["compt_admin_dep"], data["compt_num_sco_dep"]);
     cardRegion = ResultCard("", data["score_glob_reg"], data["nom_region"], data["acces_num_reg"], data["acces_info_reg"], data["compt_admin_reg"], data["compt_num_sco_reg"]);
     return true;
@@ -31,7 +31,7 @@ class _RowCardsState extends State<RowCards> {
   @override
   Widget build(BuildContext context) {
       if (MediaQuery.of(context).size.width <= 1300) {
-      if(widget.result != null) {
+      if(widget.result.isNotEmpty) {
         return Column(
            children: [
              Container(
@@ -50,7 +50,6 @@ class _RowCardsState extends State<RowCards> {
                           selectedData = widget.result[index];
                           showCards = true;
                         });
-                        print(widget.result[index]);
                       },
                       title: Text(widget.result[index]['nom_iris']),
                     ),
@@ -76,11 +75,12 @@ class _RowCardsState extends State<RowCards> {
            ],
          );
       } else {
-        return Container();
-      }
-     
+        return Container(
+          child: Text('Pas de résulats, désolé...'),
+        );
+      } 
     } else {
-      if(widget.result != null) {
+      if(widget.result.isNotEmpty) {
          return Column(
            children: [
              Container(
@@ -99,7 +99,6 @@ class _RowCardsState extends State<RowCards> {
                           selectedData = widget.result[index];
                           showCards = true;
                         });
-                        print(widget.result[index]);
                       },
                       title: Text(widget.result[index]['nom_iris']),
                     ),
@@ -108,14 +107,24 @@ class _RowCardsState extends State<RowCards> {
               ),
              ),
             (showCards == true) ?
-               Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    cardCommune,
-                    cardDept,
-                    cardRegion,
-                  ],
-                )
+               Column(
+                 children: [
+                   Text(
+                     'Cliquez sur les cartes ci-dessous pour plus d\'infos',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400
+                      ),
+                   ),
+                   Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        cardCommune,
+                        cardDept,
+                        cardRegion,
+                      ],
+                    ),
+                 ],
+               )
             :
               Container(),
             (showCards == true) ?
@@ -125,7 +134,16 @@ class _RowCardsState extends State<RowCards> {
            ],
          );
       } else {
-        return Container();
+        return Container(
+          child: Center(
+            child: Text('Pas de résulats, désolé... \n(Notre base de données est encore en construction et contient déjà plus de 40 000 communes ! Nous ajouterons la votre au plus vite.\n Pour tester, essayez d\'entrer 01410 ou 12000).',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w200
+              ),
+            ),
+          ),
+        );
       }
     }
   }

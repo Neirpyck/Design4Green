@@ -11,6 +11,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Map<String, dynamic>> result;
   bool asResult = false;
   bool displayMentionLegal = false;
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ? MediaQuery.of(context).size.width * 0.3
                       : MediaQuery.of(context).size.width * 0.5,
                     child: TextField(
+                      controller: _controller,
                       onSubmitted: (value) async {
                         List<Map<String, dynamic>> hit = await getData(value);
                         result = hit; 
@@ -53,8 +55,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         hintText: 'Code postal',
                         suffixIcon: IconButton(
                           icon: Icon(Icons.search),
-                          onPressed: ()  {
-                            
+                          onPressed: () async {
+                            List<Map<String, dynamic>> hit = await getData(_controller.value.text);
+                            result = hit; 
+                              if(hit != null){
+                                setState(() {
+                                  asResult = true;
+                                });
+                              }
                           },
                         ),
                         border: OutlineInputBorder(
