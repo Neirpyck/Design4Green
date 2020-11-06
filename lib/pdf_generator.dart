@@ -73,23 +73,23 @@ class PdfGenerator extends StatelessWidget {
               ),
               pw.Row(children: [
                 pw.Text("Accès Numérique: "),
-                pw.Text("Variable num" + " %"),
+                pw.Text("Variable num"),
               ]),
               pw.Row(children: [
                 pw.Text("Accès Information: "),
-                pw.Text("Variable info" + " %"),
+                pw.Text("Variable info"),
               ]),
               pw.Row(children: [
                 pw.Text("Compétence administratives: "),
-                pw.Text("Variable admin" + " %"),
+                pw.Text("Variable admin"),
               ]),
               pw.Row(children: [
                 pw.Text("Compétences numériques: "),
-                pw.Text("Variable num" + " %"),
+                pw.Text("Variable num"),
               ]),
               pw.Row(children: [
                 pw.Text("Score Global: "),
-                pw.Text("Variable glob" + " % \n"),
+                pw.Text("Variable glob\n"),
               ]),
               pw.Header(
                 level: 0,
@@ -98,23 +98,23 @@ class PdfGenerator extends StatelessWidget {
               ),
               pw.Row(children: [
                 pw.Text("Accès Numérique: "),
-                pw.Text("Variable num" + " %"),
+                pw.Text("Variable num"),
               ]),
               pw.Row(children: [
                 pw.Text("Accès Information: "),
-                pw.Text("Variable info" + " %"),
+                pw.Text("Variable info"),
               ]),
               pw.Row(children: [
                 pw.Text("Compétence administratives: "),
-                pw.Text("Variable admin" + " %"),
+                pw.Text("Variable admin"),
               ]),
               pw.Row(children: [
                 pw.Text("Compétences numériques: "),
-                pw.Text("Variable num" + " %"),
+                pw.Text("Variable num"),
               ]),
               pw.Row(children: [
                 pw.Text("Score Global: "),
-                pw.Text("Variable glob" + " % \n"),
+                pw.Text("Variable glob\n"),
               ]),
             ],
           );

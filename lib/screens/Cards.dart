@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
-
 import '../pdf_generator.dart';
 
 class RowCards extends StatefulWidget {
@@ -16,55 +15,66 @@ class RowCards extends StatefulWidget {
 
 class _RowCardsState extends State<RowCards> {
   bool showCards = false;
-  Widget myCards;
+  Widget cardCommune;
+  Widget cardDept;
+  Widget cardRegion;
   Map<String, dynamic> selectedData = {};
 
   showingCards(Map<String, dynamic> data) {
-    myCards = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ResultCard(data["pop"], data["score_glob"], data["nom_iris"], data["acces_num"], data["acces_info"], data["compt_admin"], data["compt_num_sco"]),
-        ResultCard(null, null, '-', null, null, null, null),
-        ResultCard(null, null, '-', null, null, null, null),
-      ],
-    );
+    cardCommune =  ResultCard(data["pop"], data["score_glob"], data["nom_iris"], data["acces_num"], data["acces_info"], data["compt_admin"], data["compt_num_sco"]);
+    cardDept = ResultCard(null, null, '-', null, null, null, null);
+    cardRegion = ResultCard(null, null, '-', null, null, null, null);
     return true;
   }
+
 
   @override
   Widget build(BuildContext context) {
       if (MediaQuery.of(context).size.width <= 1300) {
       if(widget.result != null) {
-        return Container(
-          height: 300,
-          width: 300,
-          child: ListView.builder(
-            itemCount: widget.result.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: widget.result[index]['nom_iris'],
-              );
-            },
-          ),
-        );
-        // return Column(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: [
-        //         ResultCard(null, null, '-', null, null, null, null),
-        //         ResultCard(null, null, '-', null, null, null, null),
-        //         ResultCard(null, null, '-', null, null, null, null),
-        //         ResultCard(null, null, '-', null, null, null, null),
-
-        //         // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-        //         // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-        //         // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
-
-        //         // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-        //         // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-        //         // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-        //         // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
-        //   ],
-        // );
+        return Column(
+           children: [
+             Container(
+               height: 300,
+               width: MediaQuery.of(context).size.width > 900
+                  ? MediaQuery.of(context).size.width * 0.3
+                  : MediaQuery.of(context).size.width * 0.5,
+               child: ListView.builder(
+                itemCount: widget.result.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: () {
+                        setState(() {
+                          showingCards(widget.result[index]);
+                          selectedData = widget.result[index];
+                          showCards = true;
+                        });
+                        print(widget.result[index]);
+                      },
+                      title: Text(widget.result[index]['nom_iris']),
+                    ),
+                  );
+                },
+              ),
+             ),
+            (showCards == true) ?
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    cardCommune,
+                    cardDept,
+                    cardRegion,
+                  ],
+                )
+            :
+              Container(),
+            (showCards == true) ?
+              PdfGenerator(result: selectedData)
+            :
+              Container(),
+           ],
+         );
       } else {
         return Container();
       }
@@ -98,15 +108,14 @@ class _RowCardsState extends State<RowCards> {
               ),
              ),
             (showCards == true) ?
-              myCards
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     ResultCard(null, null, '-', null, null, null, null),
-              //     ResultCard(null, null, '-', null, null, null, null),
-              //     ResultCard(null, null, '-', null, null, null, null),
-              //   ],
-              // )
+               Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    cardCommune,
+                    cardDept,
+                    cardRegion,
+                  ],
+                )
             :
               Container(),
             (showCards == true) ?
@@ -115,53 +124,9 @@ class _RowCardsState extends State<RowCards> {
               Container(),
            ],
          );
-        // return Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          // children: [
-          //   ResultCard(null, null, '-', null, null, null, null),
-          //   ResultCard(null, null, '-', null, null, null, null),
-          //   ResultCard(null, null, '-', null, null, null, null),
-          //   ResultCard(null, null, '-', null, null, null, null),
-
-          //       // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-          //       // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-          //       // ResultCard(2000, 93, 'Global', 97, 78, 96, 105)
-
-          //       // ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-          //       // ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-          //       // ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-          //       // ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
-          // ],
-        // );
       } else {
-        // return Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: [
-        //     ResultCard(
-        //       widget.result['pop'],
-        //       widget.result['score_glob'],
-        //       widget.result['nom_com'],
-        //       widget.result['acces_num'],
-        //       widget.result['acces_info'],
-        //       widget.result['compt_admin'],
-        //       widget.result['compt_num_sco']
-        //     ),
-        //     ResultCard(null, null, '-', null, null, null, null),
-        //     ResultCard(null, null, '-', null, null, null, null),
-        //     ResultCard(null, null, '-', null, null, null, null),
-        //   ],
-        // );
         return Container();
       }
-      // return Row(
-      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //   children: [
-      //     ResultCard(2000, 93, 'Seiches sur le Loir', 97, 78, 96, 105),
-      //     ResultCard(2000, 93, 'Maine et Loire', 97, 78, 96, 105),
-      //     ResultCard(2000, 93, 'Pays de la Loire', 97, 78, 96, 105),
-      //     ResultCard(2000, 93, 'Global', 97, 78, 96, 105),
-      //   ],
-      // );
     }
   }
 }
